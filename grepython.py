@@ -1,5 +1,4 @@
 import argparse
-from termcolor import colored
 
 
 def main():
@@ -16,7 +15,9 @@ def main():
     args = parser.parse_args()
 
     if args.color:
-        print(colored(args.regex, 'green'))
+        color_red = '\033[91m'
+        color_end = '\033[0m'
+        print(color_red + args.regex + color_end)
 
 
 if __name__ == '__main__':
