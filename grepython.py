@@ -1,15 +1,17 @@
 import argparse
 import fileinput
+import re
 
 
 def common():
     common_parser = argparse.ArgumentParser()
     common_parser.add_argument('-r', '--regex', metavar='REGEX', required=True, help='regular expression')
-    common_parser.add_argument('-f', '--files', metavar='FILE', required=True, help='files to search in, STDIN is '
-                                                                                    'used if not file specified')
+    common_parser.add_argument('-f', '--files', metavar='FILE', required=True, help="files to search in, STDIN is "
+                                                                                    "used if not file specified")
     common_args = common_parser.parse_args()
     for line in fileinput.input(files=common_args.files if len(common_args.files) > 0 else ('-',)):
-        print(line)
+        line = re.search(common_args.regex, line)
+        print(fileinput.filename(), fileinput.filelineno(), line)
 
 
 def optional():
