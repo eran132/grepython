@@ -9,7 +9,7 @@ def common():
     common_parser.add_argument('-f', '--files', metavar='FILE', required=True, help="files to search in, STDIN is "
                                                                                     "used if not file specified")
     common_args = common_parser.parse_args()
-    for line in fileinput.input(files=common_args.files if len(common_args.files) > 0 else ('-',)):
+    for line in fileinput.input(common_args.files):
         line = re.search(common_args.regex, line)
         print(fileinput.filename(), fileinput.filelineno(), line)
 
