@@ -25,3 +25,11 @@ if __name__ == '__main__':
                 format_of_print = '{files:<10}:{lineno:<10}:{line}'
             print(format_of_print.format(files=fileinput.filename(), lineno=fileinput.filelineno(),
                                          line=line.rstrip()))
+            if args.color:
+                color_red = '\033[91m'
+                color_end = '\033[0m'
+                colored_line = re.sub(args.regex, color_red + args.regex + color_end, line)
+                format_of_print = '{files:<10}:{lineno:<10}:{colored_line}'
+
+            print(format_of_print.format(files=fileinput.filename(), lineno=fileinput.filelineno(),
+                                         colored_line=colored_line.rstrip()))
